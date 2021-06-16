@@ -25,7 +25,7 @@ bucket=bucketdearnaud
 aws configure import --csv file://credentials.csv
 
 #creation du bucket 
-aws s3 mb s3://$bucket
+aws s3 mb s3://$bucket --region us-west-1
 
 # copie des fichier de backup 
 aws s3 cp $dirbackup/home-$backupdate.tar.bz2 s3://$bucket/backup

@@ -8,7 +8,7 @@ backupdate=$(date +%Y-%m-%d)
 dirbackup=/backup/backup-$backupdate
 
 #nom du bucket
-bucket=bucketdearnaud
+bucket="nomdubucket"
 
 # création du répertoire de backup
 /bin/mkdir $dirbackup
@@ -25,12 +25,12 @@ bucket=bucketdearnaud
 aws configure import --csv file://credentials.csv
 
 #creation du bucket 
-aws s3 mb s3://$bucket --region us-west-1
+aws s3 mb s3://$bucket --region eu-west-3
 
 # copie des fichier de backup 
-aws s3 cp $dirbackup/home-$backupdate.tar.bz2 s3://$bucket/backup
+aws s3 cp $dirbackup/home-$backupdate.tar.bz2 s3://$bucket
 
-aws s3 cp $dirbackup/mysqldump-$backupdate.sql.gz s3://$bucket/backup
+aws s3 cp $dirbackup/mysqldump-$backupdate.sql.gz s3://$bucket
 
 #mise en place du cycle de vie des fichiers pour les supprimer au bout de 7 jours
 aws s3api put-bucket-lifecycle-configuration --bucket $bucket --lifecycle-configuration file://lifecycle.json

@@ -20,6 +20,8 @@ dirbackup=/backup/backup-$backupdate
 
 aws configure import --csv file://credentials.csv
 
+aws s3api create-bucket --bucket bucketdearnaud --region eu-west-1 --create-bucket-configuration LocationConstraint=eu-west-1
+
 aws s3 cp home-$backupdate.tar.bz2 s3://bucketdearnaud/backup
 
 aws s3 cp mysqldump-$backupdate.sql.gz s3://bucketdearnaud/backup
